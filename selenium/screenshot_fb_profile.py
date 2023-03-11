@@ -3,6 +3,10 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
+from selenium.webdriver.common.by import By
+from datetime import datetime
+now = datetime.now()
+
 # close notification
 options = webdriver.ChromeOptions()
 prefs = {
@@ -30,7 +34,18 @@ login_button.click()
 
 
 # Wait for a few seconds to let the page load
-time.sleep(20)
+time.sleep(10)
+browser.get('https://www.facebook.com/profile.php')
+
+
+time.sleep(5)
+ele=browser.find_element(By.CLASS_NAME,'x1ja2u2z')
+total_height = ele.size["height"]+1000
+browser.set_window_size(1920, total_height)
+screenshot_path = f"./screenshot_facebook_profile_{now.strftime('%Y%m%d')}.png"
+browser.save_screenshot(screenshot_path)
+
+time.sleep(10)
 
 # Close the browser
 browser.close()
