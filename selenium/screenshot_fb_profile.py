@@ -3,8 +3,19 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
 
+# close notification
+options = webdriver.ChromeOptions()
+prefs = {
+    'profile.default_content_setting_values':
+        {
+            'notifications': 2
+        }
+}
+options.add_experimental_option('prefs', prefs)
+options.add_argument("disable-infobars")
+
 # Set up the webdriver
-browser = webdriver.Chrome()
+browser = webdriver.Chrome(options=options)
 browser.get('https://www.facebook.com')
 
 # Find the email and password fields and enter your login credentials
